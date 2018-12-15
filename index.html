@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <title>🕶 Bindtuning Engagdet RSS Reader</title>
+        
+        <link 
+            rel="stylesheet" 
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
+            integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+        <link rel="stylesheet" href="./style.css" />
+        
+        <!-- Script(s) are loaded with `defer` method instead of placing it in the bottom. 
+            So that it's loaded asynchronously but the invocation happens when the HTML document has been parsed -->
+        <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"
+            defer></script>
+        <script 
+            src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js" 
+            defer></script>
+        <script 
+            src="script.js" 
+            defer></script>
+    </head>
+
+
+    <body class="bg-light">
+        <!-- Header begin -->
+        <header class="container-fluid align-items-center  text-white-50 bg-dark ">
+            <div class="row ">
+                <div class="col p-4 my-2 shadow-sm">
+                    <img class="mr-3" src="https://www.blogsmithmedia.com/www.engadget.com/media/feedlogo.gif?cachebust=true" alt="" width="48" height="48">
+                    <div class="lh-100">
+                        <h1 class="mb-0 text-white lh-100">RSS Reader</h1>
+                        <small> <a href="#refresh">Refresh feed</a> </small>
+                    </div>
+                </div>
+            </div>
+            
+        </header>
+        
+
+        <main class="container-fluid" role="main">
+
+            <div id="feed-reader-container" class="row justify-content-md-center">
+                
+                <!-- RSS items container begin -->
+                <div id="rss-items-container1" class="rss-items-container col-12 col-md-6 col-xl-4 my-3 p-3 bg-white rounded shadow-sm">
+                    
+                    
+                    <!-- <div id="rss-item-123" class="media text-muted py-2 border-top">
+                        <img alt="128" class="mr-2 rounded" style="width: 320px; height: 200px;" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2232%22%20height%3D%2232%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_167ae3a503b%20text%20%7B%20fill%3A%23007bff%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A2pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_167ae3a503b%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20fill%3D%22%23007bff%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2211.958333492279053%22%20y%3D%2216.999999976158144%22%3E32x32%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" >
+                        <p class="media-body pb-3 mb-0 small lh-125 border-gray">
+                            <a class="readmore" target="_blank" href="{ link }"><strong class="item-title" class="d-block text-gray-dark">{ title }</strong></a>
+                            Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+                        </p>
+                    </div> -->
+
+                    <div id="rss-item-template" class="rss-item text-muted py-2 border-top" style="display: block">
+                        <div class="number">1</div>
+                        <div class="details pb-3 mb-0 small lh-125 border-gray" >
+                            <a class="readmore" target="_blank" href="{ link }"><h4 class="item-title" class="d-block text-gray-dark">{ title }</h4></a>
+                            <p class="excerpt">{ excerpt }</p>
+                            <a class="readmore published-date" target="_blank" href="{ link }">{ a few moments ago }</a>
+                        </div>
+                        <br class="clearfix clear" />
+                    </div>
+
+                </div>
+
+
+
+                <!-- RSS items container begin -->
+                <div id="rss-items-container2" class="rss-items-container col-12 col-md-6 col-xl-4 my-3 p-3 bg-white rounded shadow-sm">
+                    
+                    <div id="rss-item-126" class="rss-item text-muted py-2 border-top" style="position: relative; display: block">
+                        <div class="number" style="">1</div>
+                        <div class="details pb-3 mb-0 small lh-125 border-gray" style="" >
+                            <a class="readmore" target="_blank" href="{ link }"><h4 class="item-title" class="d-block text-gray-dark">{ title }</h4></a>
+                            <p class="excerpt">{ excerpt }</p>
+                            <a class="readmore" target="_blank" href="{ link }">Read more...</a>
+                        </div>
+                        <br class="clearfix clear" />
+                    </div>
+
+                </div>
+
+                <!-- RSS items container begin -->
+                <div id="rss-items-container3" class="rss-items-container col-12 col-md-6 col-xl-4 my-3 p-3 bg-white rounded shadow-sm">
+                       
+                    <div id="rss-item-126" class="rss-item text-muted py-2 border-top" style="position: relative; display: block">
+                        <div class="number" style="">1</div>
+                        <div class="details pb-3 mb-0 small lh-125 border-gray" style="" >
+                            <a class="readmore" target="_blank" href="{ link }"><h4 class="item-title" class="d-block text-gray-dark">{ title }</h4></a>
+                            <p class="excerpt">{ excerpt }</p>
+                            <a class="readmore" target="_blank" href="{ link }">Read more...</a>
+                        </div>
+                        <br class="clearfix clear" />
+                    </div>
+
+                </div>
+                
+            </div>
+        </main>
+    </body>
+</html>

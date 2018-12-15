@@ -1,0 +1,36 @@
+.rss-item .number { 
+    float: left; 
+    display: block; 
+    text-align: center; 
+    background-color: olivedrab; 
+    color: white; 
+    width: 28px;
+    height: 28px; 
+    margin-right: 5px;
+    line-height: 28px; 
+    font-size: 14px; 
+    border-radius: 100px; 
+}
+
+.rss-item .details {
+    float: left;
+    width: 90%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.rss-item .item-title {
+    font-size: 1.4em;
+    height: 1.4em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.rss-item .excerpt {
+    width: 100%;
+}
+
+.clearfix, .clear {
+    clear: both;
+
+}
