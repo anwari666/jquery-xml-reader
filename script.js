@@ -3,8 +3,10 @@
     
     var feedUrl = 'https://www.engadget.com/rss-full.xml';
     var $rssItemTemplate = $('#rss-item-template');
+    var $feedContainer = $('#feed-reader-container');
 
     var FeedReader = function(target, url, callback){
+        this.id         = Date.now();
         this.target     = target;
         this.url        = url;
         this.callback   = callback || function(){ };
@@ -31,9 +33,10 @@
                 _this.feed = Object.assign({}, data.responseData.feed);
                 _this.entries = Object.assign({}, data.responseData.feed.entries);
                 
+                console.log(_this.feed);
                 // _this.callback(entries);
                 var html = _this.formatFeed();
-                $('.rss-items-container').html(html); // more like append
+                $feedContainer.prepend(html); // more like append
                 // console.log(feed, entries)
             })
         } 
@@ -62,13 +65,11 @@
     FeedReader.prototype.formatEntry = function(entry){
         var $entryTemplate = $rssItemTemplate.clone();
 
-        $img = $( entry.content ).find('img')[0];
-
+        
         // find the items and replace with respective attribute
         $entryTemplate.attr( 'id', 'rss-item-' + entry.number );
         $entryTemplate.find('.number').text( entry.number );
         $entryTemplate.find('.item-title').text( entry.title );
-        // $entryTemplate.find('.content-snippet').text( entry.contentSnippet + '...' );
         $entryTemplate.find('.excerpt').text(  this.generateExcerpt( entry.content ) );
         $entryTemplate.find('.readmore').prop( 'href', entry.link );
         $entryTemplate.find('.published-date').text( this.formatPublishedDate( entry.publishedDate ) );
@@ -85,10 +86,11 @@
 
     // Return the FeedHeader and FeedEntries
     FeedReader.prototype.formatFeed = function(){
-        var header = this.formatHeader(),
+        var feed = $('<div id="rss-items-container1" class="rss-items-container col-12 col-md-6 col-xl-4 my-3 p-3 bg-white rounded shadow-sm">'),
+            header = this.formatHeader(),
             entries = this.formatEntries();
 
-        return new Array().concat([ header ], entries);
+        return feed.append(header).append(entries); // new Array().concat([ header ], entries);
     }
 
     FeedReader.prototype.refresh = function(){
@@ -102,15 +104,21 @@
     }
 
     FeedReader.prototype.generateExcerpt = function( contentString ){
-        return $( contentString.trim() )
-                .text()
-                .replace(/\s+/g, ' ')
+        return htmlDecode( contentString )
                 .split('')
                 .slice(0, 100)
                 .join('') 
                 + '...';
     }
 
-    new FeedReader('', feedUrl, null).render();
+    // a utility funciton to decode HTML entities
+    function htmlDecode(input)
+    {
+        var doc = new DOMParser().parseFromString(input, "text/html");
+        return doc.documentElement.textContent;
+    }
 
+    new FeedReader('', feedUrl, null).render();
+    new FeedReader('', 'https://www.aljazeera.com/xml/rss/all.xml', null).render();
+    new FeedReader('', 'https://www.theonion.com/rss', null).render();
 })(jQuery, moment);
