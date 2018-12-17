@@ -89,7 +89,21 @@
                                 <a class="readmore published-date" target="_blank" href="{ link }">{ a few moments ago }</a>
                             </span>
                         </div>
-                    </a>
+
+                    </div>
+
+                    <!-- Empty feed template -->
+                    <div id="empty-feed" class="text-center">
+                        <span style="font-size: 96px">🤷‍♀️</span>
+                        <h5 class="">Empty Feed. <br>Nothing to read here</h5>
+                    </div>
+
+                    <!-- Error loading feed template -->
+                    <div id="error-feed" class="text-center">
+                        <span style="font-size: 96px">⚡️🤖⚡️</span>
+                        <h5 class="">Error loading feed at { feed.url }</h5>
+                        <input class="btn btn-outline-primary" type="submit" value="Back">
+                        <input class="btn btn-outline-primary" type="submit" value="Reload">
                     </div>
 
                 </div>
