@@ -36,7 +36,10 @@
                     <img class="mr-3" src="https://www.blogsmithmedia.com/www.engadget.com/media/feedlogo.gif?cachebust=true" alt="" width="48" height="48">
                     <div class="lh-100">
                         <h1 class="mb-0 text-white lh-100">RSS Reader</h1>
-                        <small> <a href="#refresh">Refresh feed</a> </small>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <a class="btn btn-secondary" href="#create">Add <FeedReader></FeedReader></a> 
+                            <a class="btn btn-secondary" href="#refresh">Refresh</a> 
+                        </div>
                     </div>
                 </div>
             </div>
@@ -50,11 +53,6 @@
                 
                 <!-- FeedReader container begin -->
                 <div id="rss-items-container1" class="rss-items-container col-12 col-md-6 col-xl-4 my-3 p-3 ">
-                    
-
-                    <div id="button-new-feedreader" class="rss-item text-muted py-2" >
-                        <button class="btn btn-outline-secondary btn-block">Create new</button>
-                    </div>
 
                     <!-- Create New FeedReader template -->
                     <div id="new-feedreader" class="rss-item text-muted py-2" >
@@ -65,11 +63,11 @@
                             <div class="form-group">
                                 <label for="feed-url">RSS Feed URL</label>   
                                 <input class="form-control" name="feed-url" type="text" placeholder="e.g: https://www.theonion.com/rss" aria-describedby="emailHelp" >
-                                <small id="emailHelp" class="form-text text-muted">Any valid RSS feed url<!-- , example: https://www.theonion.com/rss or https://www.aljazeera.com/xml/rss/all.xml  --></small>
+                                <small id="emailHelp" class="form-text text-muted">Any valid RSS feed url. <!-- , example: https://www.theonion.com/rss or https://www.aljazeera.com/xml/rss/all.xml  --></small>
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    
+                                    <input class="btn btn-outline-secondary btn-block" type="submit" value="Cancel">
                                 </div>
                                 <div class="col">
                                     <input class="btn btn-primary btn-block" type="submit" value="Load feed" disabled>
