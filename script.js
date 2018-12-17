@@ -35,8 +35,8 @@
         this.$NewFeedTemplate = $NewFeedTemplate.clone();
 
         this.$NewFeedTemplate
-                .on('click', '#load-feed', function(e){ alert('coi') } )
-                .on('click', '#cancel-feed', function(e){_this.destroy()} ); // !!
+                .on('submit', function(e){ e.preventDefault(); _this.url = _this.$NewFeedTemplate.find('#feed-url').val(); _this.loadFeed() } )
+                .on('click', '#cancel-feed', function(e){ _this.destroy() } ); // !!
 
         this.render( this.$NewFeedTemplate );
     }

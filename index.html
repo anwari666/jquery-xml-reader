@@ -62,12 +62,12 @@
 
                             <div class="form-group">
                                 <label for="feed-url">RSS Feed URL</label>   
-                                <input class="form-control" name="feed-url" type="text" placeholder="e.g: https://www.theonion.com/rss" aria-describedby="emailHelp" >
+                                <input id="feed-url" class="form-control" name="feed-url" type="text" placeholder="e.g: https://www.theonion.com/rss" aria-describedby="emailHelp" >
                                 <small id="emailHelp" class="form-text text-muted">Must be valid RSS feed url. <!-- , example: https://www.theonion.com/rss or https://www.aljazeera.com/xml/rss/all.xml  --></small>
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <input id="cancel-feed" class="btn btn-outline-secondary btn-block" type="submit" value="Cancel">
+                                    <button id="cancel-feed" class="btn btn-outline-secondary btn-block">Cancel</button>
                                 </div>
                                 <div class="col">
                                     <input id="load-feed" class="btn btn-primary btn-block" type="submit" value="Load feed">
