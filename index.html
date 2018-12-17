@@ -37,8 +37,8 @@
                     <div class="lh-100">
                         <h1 class="mb-0 text-white lh-100">RSS Reader</h1>
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            <a class="btn btn-secondary" href="#create">Add <FeedReader></FeedReader></a> 
-                            <a class="btn btn-secondary" href="#refresh">Refresh</a> 
+                            <a id="add-new-feed" class="btn btn-secondary" href="#create">Add new</a> 
+                            <a id="refresh-feed" class="btn btn-secondary" href="#refresh">Refresh</a> 
                         </div>
                     </div>
                 </div>
@@ -56,39 +56,42 @@
 
                     <!-- Create New FeedReader template -->
                     <div id="new-feedreader" class="rss-item text-muted py-2" >
-                        <h4 class="border-bottom">Create new FeedReader</h4>
+                        <h4 class="border-bottom">Add New Feed</h4>
                         
                         <form action="#" method="GET">
 
                             <div class="form-group">
                                 <label for="feed-url">RSS Feed URL</label>   
                                 <input class="form-control" name="feed-url" type="text" placeholder="e.g: https://www.theonion.com/rss" aria-describedby="emailHelp" >
-                                <small id="emailHelp" class="form-text text-muted">Any valid RSS feed url. <!-- , example: https://www.theonion.com/rss or https://www.aljazeera.com/xml/rss/all.xml  --></small>
+                                <small id="emailHelp" class="form-text text-muted">Must be valid RSS feed url. <!-- , example: https://www.theonion.com/rss or https://www.aljazeera.com/xml/rss/all.xml  --></small>
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <input class="btn btn-outline-secondary btn-block" type="submit" value="Cancel">
+                                    <input id="cancel-feed" class="btn btn-outline-secondary btn-block" type="submit" value="Cancel">
                                 </div>
                                 <div class="col">
-                                    <input class="btn btn-primary btn-block" type="submit" value="Load feed" disabled>
+                                    <input id="load-feed" class="btn btn-primary btn-block" type="submit" value="Load feed">
                                 </div>
                             </div>
                             
                         </form>
                     </div>
+                    
 
                     <!-- FeedReader single entry template -->
-                    <div id="rss-item-template" class="rss-item text-muted py-2 border-top" >
-                        
-                        <div class="number"> 1 </div>
+                    <div id="rss-item-template" class="rss-item py-2 text-muted border-top" >
+                        <a href="#" class="readmore flex-column align-items-start">
 
-                        <div class="details mb-0 small lh-125 border-gray" >
-                            <a class="readmore" target="_blank" href="{ link }" title="{ title }"><h4 class="item-title" class="d-block text-gray-dark">{ title }</h4></a>
-                            <p class="excerpt d-none d-xl-block">{ excerpt }</p>
-                            <span class="small-detail">
-                                <a class="readmore published-date" target="_blank" href="{ link }">{ a few moments ago }</a>
-                            </span>
-                        </div>
+                            <div class="number"> 1 </div>
+
+                            <div class="details mb-0 small lh-125 border-gray" >
+                                <h4 class="item-title" class="d-block text-gray-dark">{ title }</h4>
+                                <p class="excerpt d-none d-xl-block">{ excerpt }</p>
+                                <span class="small-detail published-date">
+                                    { a few moments ago }
+                                </span>
+                            </div>
+                        </a>
 
                     </div>
 

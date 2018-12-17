@@ -1,44 +1,83 @@
 // IIFE - to encapsulate the javascript
 (function($, moment){
     
-    var feedUrl = 'https://www.engadget.com/rss-full.xml';
-    var $rssItemTemplate = $('#rss-item-template');
-    var $feedContainer = $('#feed-reader-container');
     var feeds = [];
+    var feedUrl = 'https://www.engadget.com/rss-full.xml';
+    var $FeedItemTemplate = $('#rss-item-template');
+    var $NewFeedTemplate = $('#new-feedreader');
+    var $loadingTemplate = $('#loading-feed');
+    var $feedsContainer = $('#feed-reader-container');
 
-    var FeedReader = function(target, url, callback){
+    var FeedReader = function(url, callback){
         this.id         = Date.now();
-        this.target     = target;
-        this.url        = url;
+        this.url        = url || false;
         this.callback   = callback || function(){ };
         this.num        = 10;
         // Since engadget's server does not come with X-ORIGIN REQUEST POLICY, then 
         // I'm using a service from feedrapp that provide such service
-        this.serviceName= 'www.feedrapp.info'; 
+        this.serviceName= 'www.feedrapp.info';
+        this.$htmlContainer = $('<div id="rss-items-container-' 
+                                    + this.id 
+                                    + '" class="rss-items-container col-12 col-md-6 col-xl-4 my-3 p-3 bg-white rounded shadow-sm">');
+
+        // logic to render the container + create new
+        
+
+        if (url) { this.loadFeed() } 
+        else { this.create() } 
+        
+        this.renderContainer();
     }
 
-    FeedReader.prototype.load = function(callback){
+    FeedReader.prototype.create = function(){
+        var _this = this;
+
+        this.$NewFeedTemplate = $NewFeedTemplate.clone();
+
+        this.$NewFeedTemplate
+                .on('click', '#load-feed', function(e){ alert('coi') } )
+                .on('click', '#cancel-feed', function(e){_this.destroy()} ); // !!
+
+        this.render( this.$NewFeedTemplate );
+    }
+
+    FeedReader.prototype.destroy = function(){
+        this.$htmlContainer.remove();
+        // need to remove from feeds as well.
+    }
+
+    FeedReader.prototype.formatNewFeedTemplate = function(){
+        // this.$htmlContainer.html( $NewFeedTemplate.clone() );
+    }
+
+    // put the whole thing into the DOM.
+    FeedReader.prototype.renderContainer = function(){
+        $feedsContainer.prepend( this.$htmlContainer );
+    }
+
+    FeedReader.prototype.fetch = function(callback){
         var encodedRssUri = encodeURIComponent(this.url);
         var jsonUrl =   'https://' + this.serviceName + 
                         '?callback=?&q=' + encodedRssUri + 
                         '&num=' + this.num;
 
+        this.render( $loadingTemplate.clone() );
+
         $.getJSON(jsonUrl, callback);
     }
 
-    FeedReader.prototype.render = function(){
+    FeedReader.prototype.loadFeed = function(){
         var _this = this;
         
         try {
-            this.load(function(data){
+            this.fetch( function(data){
                 _this.feed = Object.assign({}, data.responseData.feed);
                 _this.entries = Object.assign({}, data.responseData.feed.entries);
                 
-                console.log(_this.feed);
-                // _this.callback(entries);
-                var html = _this.formatFeed();
-                $feedContainer.prepend(html); // more like append
-                // console.log(feed, entries)
+                var header = _this.formatHeader(),
+                    entries = _this.formatEntries();
+    
+                _this.render( [header].concat(entries) );
             })
         } 
         catch (e) {
@@ -64,11 +103,11 @@
     // Format a single entry. 
     // Better use templating engine like Mustache for better readability
     FeedReader.prototype.formatEntry = function(entry){
-        var $entryTemplate = $rssItemTemplate.clone();
+        var $entryTemplate = $FeedItemTemplate.clone();
 
         
         // find the items and replace with respective attribute
-        $entryTemplate.attr( 'id', 'rss-item-' + entry.number );
+        $entryTemplate.attr( 'id', 'rss-'+ this.id + '-item-' + entry.number );
         $entryTemplate.find('.number').text( entry.number );
         $entryTemplate.find('.item-title').text( entry.title );
         $entryTemplate.find('.excerpt').text(  this.generateExcerpt( entry.content ) );
@@ -85,13 +124,9 @@
         return $('<h4 class="pb-6 mb-0">' + this.feed.title + '</h4>');
     }
 
-    // Return the FeedHeader and FeedEntries
-    FeedReader.prototype.formatFeed = function(){
-        var feed = $('<div id="rss-items-container1" class="rss-items-container col-12 col-md-6 col-xl-4 my-3 p-3 bg-white rounded shadow-sm">'),
-            header = this.formatHeader(),
-            entries = this.formatEntries();
 
-        return feed.append(header).append(entries); // new Array().concat([ header ], entries);
+    FeedReader.prototype.render = function( $item ){
+        this.$htmlContainer.html( $item )
     }
 
     FeedReader.prototype.refresh = function(){
@@ -113,19 +148,32 @@
     }
 
     // a utility funciton to decode HTML entities
-    function htmlDecode(input)
-    {
+    function htmlDecode(input) {
         var doc = new DOMParser().parseFromString(input, "text/html");
         return doc.documentElement.textContent;
     }
 
+    function bindEvents() {
+        $('#add-new-feed').on('click', function(e){
+            var reader = new FeedReader();
+    
+            feeds.push( reader );
+        });
+    }
 
-    var engadget = new FeedReader('', feedUrl, null).render();
+    // Main function
+    function main(){
+        bindEvents();
 
-    feeds.push(engadget);
+        var engadget = new FeedReader(feedUrl, null);
+        feeds.push(engadget);
 
-    var aljazeera = new FeedReader('', 'https://www.aljazeera.com/xml/rss/all.xml', null).render();
+        // var aljazeera = new FeedReader('https://www.aljazeera.com/xml/rss/all.xml', null).render();
 
-    feeds.push(aljazeera);
-    // new FeedReader('', 'https://www.theonion.com/rss', null).render();
+        // feeds.push(aljazeera);
+        // new FeedReader('https://www.theonion.com/rss', null).render();
+    }
+
+    main();
+
 })(jQuery, moment);

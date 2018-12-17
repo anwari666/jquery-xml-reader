@@ -11,6 +11,7 @@
     border-radius: 100px; 
 }
 
+
 .rss-item .details {
     margin-left: 40px;
 }
@@ -37,7 +38,7 @@
 }
 
 .loading-icon {
-    animation: loading 2.2s infinite;
+    animation: loading 1.6s infinite;
 }
 
 main a:visited {
