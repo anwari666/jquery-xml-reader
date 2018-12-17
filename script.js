@@ -71,7 +71,7 @@
         $entryTemplate.find('.number').text( entry.number );
         $entryTemplate.find('.item-title').text( entry.title );
         $entryTemplate.find('.excerpt').text(  this.generateExcerpt( entry.content ) );
-        $entryTemplate.find('.readmore').prop( 'href', entry.link );
+        $entryTemplate.find('.readmore').prop( 'href', entry.link ).attr('title', entry.title );
         $entryTemplate.find('.published-date').text( this.formatPublishedDate( entry.publishedDate ) );
         $entryTemplate.css('display', 'inherit');
 
@@ -119,6 +119,6 @@
     }
 
     new FeedReader('', feedUrl, null).render();
-    new FeedReader('', 'https://www.aljazeera.com/xml/rss/all.xml', null).render();
-    new FeedReader('', 'https://www.theonion.com/rss', null).render();
+    // new FeedReader('', 'https://www.aljazeera.com/xml/rss/all.xml', null).render();
+    // new FeedReader('', 'https://www.theonion.com/rss', null).render();
 })(jQuery, moment);
