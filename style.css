@@ -26,6 +26,20 @@
     white-space: nowrap;  */
 }
 
+.feed-status-icon {
+    font-size: 96px;
+}
+
+@keyframes loading {
+    0% { opacity: .3; }
+    50%   { opacity: 1;}
+    100%   { opacity: .3;}
+}
+
+.loading-icon {
+    animation: loading 2.2s infinite;
+}
+
 main a:visited {
     /* opacity: .8; */
     color: gray;

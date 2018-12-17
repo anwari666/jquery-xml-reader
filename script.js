@@ -4,6 +4,7 @@
     var feedUrl = 'https://www.engadget.com/rss-full.xml';
     var $rssItemTemplate = $('#rss-item-template');
     var $feedContainer = $('#feed-reader-container');
+    var feeds = [];
 
     var FeedReader = function(target, url, callback){
         this.id         = Date.now();
@@ -118,7 +119,13 @@
         return doc.documentElement.textContent;
     }
 
-    new FeedReader('', feedUrl, null).render();
-    // new FeedReader('', 'https://www.aljazeera.com/xml/rss/all.xml', null).render();
+
+    var engadget = new FeedReader('', feedUrl, null).render();
+
+    feeds.push(engadget);
+
+    var aljazeera = new FeedReader('', 'https://www.aljazeera.com/xml/rss/all.xml', null).render();
+
+    feeds.push(aljazeera);
     // new FeedReader('', 'https://www.theonion.com/rss', null).render();
 })(jQuery, moment);

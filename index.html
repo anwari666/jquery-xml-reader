@@ -92,15 +92,21 @@
 
                     </div>
 
+                    <!-- Loading feed template -->
+                    <div id="loading-feed" class="text-center">
+                        <span class="loading-icon feed-status-icon">🌏</span>
+                        <h5 class="">Loading feed</h5>
+                    </div>
+                    
                     <!-- Empty feed template -->
                     <div id="empty-feed" class="text-center">
-                        <span style="font-size: 96px">🤷‍♀️</span>
+                        <span class="feed-status-icon">🤷‍♀️</span>
                         <h5 class="">Empty Feed. <br>Nothing to read here</h5>
                     </div>
 
                     <!-- Error loading feed template -->
                     <div id="error-feed" class="text-center">
-                        <span style="font-size: 96px">⚡️🤖⚡️</span>
+                        <span class="feed-status-icon">⚡️🤖⚡️</span>
                         <h5 class="">Error loading feed at { feed.url }</h5>
                         <input class="btn btn-outline-primary" type="submit" value="Back">
                         <input class="btn btn-outline-primary" type="submit" value="Reload">
