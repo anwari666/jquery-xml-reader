@@ -69,7 +69,7 @@
         // this.$htmlContainer.html( $NewFeedTemplate.clone() );
     }
 
-    // put the whole thing into the DOM.
+    // Put the whole thing into the DOM
     FeedReader.prototype.renderContainer = function(){
 
         this.$htmlContainer.addClass('color_'+ this.colorID);

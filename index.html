@@ -18,7 +18,7 @@
             href="./assets/style.css" />
         
         <!-- Script(s) are loaded with `defer` method instead of placing it in the bottom. 
-            So that it's loaded asynchronously but the invocation happens when the HTML document has been parsed -->
+            So that it's loaded asynchronously but the invocation happens after the HTML document has been parsed -->
         <script
             src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -76,7 +76,15 @@
                                     <input id="load-feed" class="btn btn-primary btn-block" type="submit" value="Load feed">
                                 </div>
                             </div>
-                            
+                            <div class="text-muted">
+                                <p>Have no idea what to put? Try these feeds...</p>
+                                <ul>
+                                    <li><strong>The Onion:</strong> https://www.theonion.com/rss</li>
+                                    <li><strong>New York Times:</strong> https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml</li>
+                                    <li><strong>Al Jazeera:</strong> https://www.aljazeera.com/xml/rss/all.xml</li>
+                                    <li><strong>Dailymail:</strong> https://www.dailymail.co.uk/articles.rss</li>
+                                </ul>
+                            </div>
                         </form>
                     </div>
                     
