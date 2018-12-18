@@ -34,6 +34,7 @@
 
 
     <body class="">
+
         <!-- Header begin -->
         <header class="container-fluid align-items-center ">
             <div class="row ">
@@ -53,17 +54,15 @@
 
         <main class="container-fluid" role="main">
 
-            <div id="feed-reader-container" class="row justify-content-md-center">
+            <div id="feed-reader-container" class="row justify-content-md-center mt-3">
                 
                 <!-- FeedReader container begin -->
-                <div id="rss-items-container1" class="rss-items-container col-12 col-md-6 col-xl-4" style="display: none">
+                <div id="rss-items-container1" class="rss-items-container col-12 col-md-6 col-xl-4 mt-1" style="display: none">
 
                     <!-- Create New FeedReader template -->
-                    <div id="new-feedreader" class="rss-item text-muted py-2" >
-                        <h4 class="border-bottom">Add New Feed</h4>
-                        
+                    <div id="new-feedreader" class="new-feedreader text-muted py-2" >
+                        <h4 class="pb-2 mb-2">Add New Feed</h4>
                         <form action="#" method="GET">
-
                             <div class="form-group">
                                 <label for="feed-url">Feed URL</label>   
                                 <input id="feed-url" class="form-control" name="feed-url" type="text" placeholder="e.g: https://www.theonion.com/rss" aria-describedby="emailHelp" >
@@ -81,6 +80,7 @@
                         </form>
                     </div>
                     
+                    <!-- Feed Title (heading) template -->
                     <h3 id="rss-item-heading" class="rss-item-heading pb-2">
                         {Feed Title}
                     </h3>
@@ -109,17 +109,11 @@
                         <h5 class="">Loading feed</h5>
                     </div>
                     
-                    <!-- Empty feed template -->
-                    <div id="empty-feed" class="text-center">
-                        <span class="feed-status-icon">🤷‍♀️</span>
-                        <h5 class="">Empty Feed. <br>Nothing to read here</h5>
-                    </div>
-
                     <!-- Error loading feed template -->
                     <div id="error-feed" class="text-center">
                         <span class="feed-status-icon">⚡️🤖⚡️</span>
                         <h5 class="">Error loading feed</h5>
-                        <input class="back-to-create-feed btn btn-outline-primary" type="submit" value="Back">
+                        <input class="close-feed btn btn-outline-primary" type="submit" value="close">
                     </div>
 
                 </div>

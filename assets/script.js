@@ -9,7 +9,6 @@
     var $loadingTemplate = $('#loading-feed');
     var $errorFeedTemplate = $('#error-feed');
     var $feedsContainer = $('#feed-reader-container');
-    var colors = ['#e90052', '#02b35e', '#f90000', '#f95202', '#4f6bef'];
 
     // The FeedReader constructor to initiate new object when called.
     // Every instance inherits prototypal inheritance
@@ -18,13 +17,13 @@
         this.url        = url || false;
         this.callback   = callback || function(){ };
         this.num        = 10;
-        this.color      = colors[ feeds.length % colors.length];
+        this.colorID    = (feeds.length % 6) + 1;
         // Since engadget's server does not come with X-ORIGIN REQUEST POLICY, then 
         // I'm using a service from feedrapp that provide such service
         this.serviceName= 'www.feedrapp.info';
         this.$htmlContainer = $('<div id="rss-items-container-' 
                                     + this.id 
-                                    + '" class="rss-items-container col-12 col-md-6">\
+                                    + '" class="rss-items-container col-12 col-md-6 mb-4">\
                                         <div class="m-1 p-3 bg-white rounded shadow-lg"></div>\
                                     </div>');
 
@@ -55,7 +54,7 @@
         setTimeout(function(){ 
             _this.$htmlContainer.remove(); 
             feeds.pop(); // !warning `feeds` is mutated
-            (feeds.length < 2) && $feedsContainer.children().removeClass('col-xl-4');
+            (feeds.length <= 2) && $feedsContainer.children().removeClass('col-xl-4');
         }, 1000);
         
     }
@@ -66,6 +65,8 @@
 
     // put the whole thing into the DOM.
     FeedReader.prototype.renderContainer = function(){
+
+        this.$htmlContainer.addClass('color_'+ this.colorID);
 
         if ( feeds.length >= 2 ) {
             $feedsContainer.children().addClass('col-xl-4')
@@ -157,9 +158,9 @@
         var _this = this;
         this.$errorFeed = $errorFeedTemplate.clone();
         this.$errorFeed
-            .find('.back-to-create-feed')
+            .find('.close-feed')
             .click(function(e){ e.preventDefault()
-                    _this.render( _this.$NewFeedTemplate );
+                    _this.destroy();
             });
         this.render( this.$errorFeed );
     }
@@ -207,9 +208,9 @@
         feeds.push(engadget);
 
         // var aljazeera = new FeedReader('https://www.aljazeera.com/xml/rss/all.xml', null).render();
-
-        // feeds.push(aljazeera);
         // new FeedReader('https://www.theonion.com/rss', null).render();
+        // https://www.dailymail.co.uk/articles.rss
+        // https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml
     }
 
     main();
