@@ -4,13 +4,18 @@
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <title>🕶 Bindtuning Engagdet RSS Reader</title>
+        <title>🕶 Challenge: Multipurpose Feed Reader</title>
         
         <link 
             rel="stylesheet" 
             href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
             integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
-        <link rel="stylesheet" href="./style.css" />
+        <link 
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700"> 
+        <link 
+            rel="stylesheet" 
+            href="./assets/style.css" />
         
         <!-- Script(s) are loaded with `defer` method instead of placing it in the bottom. 
             So that it's loaded asynchronously but the invocation happens when the HTML document has been parsed -->
@@ -23,22 +28,21 @@
             src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js" 
             defer></script>
         <script 
-            src="script.js" 
+            src="./assets/script.js" 
             defer></script>
     </head>
 
 
-    <body class="bg-light">
+    <body class="">
         <!-- Header begin -->
-        <header class="container-fluid align-items-center  text-white-50 bg-dark ">
+        <header class="container-fluid align-items-center ">
             <div class="row ">
-                <div class="col p-4 my-2 shadow-sm">
+                <div class="col">
                     <img class="mr-3" src="https://www.blogsmithmedia.com/www.engadget.com/media/feedlogo.gif?cachebust=true" alt="" width="48" height="48">
-                    <div class="lh-100">
-                        <h1 class="mb-0 text-white lh-100">RSS Reader</h1>
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <a id="add-new-feed" class="btn btn-secondary" href="#create">Add new</a> 
-                            <a id="refresh-feed" class="btn btn-secondary" href="#refresh">Refresh</a> 
+                    <div class="d-flex w-100 flex-row lh-100">
+                        <h1 id="page-title" class="mb-0 lh-100">FeedReader.</h1>
+                        <div class="ml-5 pt-2">
+                            <button id="add-new-feed" class="btn btn-primary rounded">Add Feed</button>
                         </div>
                     </div>
                 </div>
@@ -52,7 +56,7 @@
             <div id="feed-reader-container" class="row justify-content-md-center">
                 
                 <!-- FeedReader container begin -->
-                <div id="rss-items-container1" class="rss-items-container col-12 col-md-6 col-xl-4 my-3 p-3 ">
+                <div id="rss-items-container1" class="rss-items-container col-12 col-md-6 col-xl-4" style="display: none">
 
                     <!-- Create New FeedReader template -->
                     <div id="new-feedreader" class="rss-item text-muted py-2" >
@@ -61,13 +65,13 @@
                         <form action="#" method="GET">
 
                             <div class="form-group">
-                                <label for="feed-url">RSS Feed URL</label>   
+                                <label for="feed-url">Feed URL</label>   
                                 <input id="feed-url" class="form-control" name="feed-url" type="text" placeholder="e.g: https://www.theonion.com/rss" aria-describedby="emailHelp" >
-                                <small id="emailHelp" class="form-text text-muted">Must be valid RSS feed url. <!-- , example: https://www.theonion.com/rss or https://www.aljazeera.com/xml/rss/all.xml  --></small>
+                                <small id="emailHelp" class="form-text text-muted">Must be valid Feed url (rss/xml). <!-- , example: https://www.theonion.com/rss or https://www.aljazeera.com/xml/rss/all.xml  --></small>
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <button id="cancel-feed" class="btn btn-outline-secondary btn-block">Cancel</button>
+                                    <a id="cancel-feed" class="btn btn-outline-secondary btn-block" href="#cancel-feed">Cancel</a>
                                 </div>
                                 <div class="col">
                                     <input id="load-feed" class="btn btn-primary btn-block" type="submit" value="Load feed">
@@ -77,19 +81,23 @@
                         </form>
                     </div>
                     
+                    <h3 id="rss-item-heading" class="rss-item-heading pb-2">
+                        {Feed Title}
+                    </h3>
 
                     <!-- FeedReader single entry template -->
-                    <div id="rss-item-template" class="rss-item py-2 text-muted border-top" >
-                        <a href="#" class="readmore flex-column align-items-start">
+                    <div id="rss-item-template" class="rss-item py-3 text-muted border-bottom" >
+                        <a href="#" class="readmore flex-column align-items-start" target="_blank">
 
                             <div class="number"> 1 </div>
 
                             <div class="details mb-0 small lh-125 border-gray" >
                                 <h4 class="item-title" class="d-block text-gray-dark">{ title }</h4>
                                 <p class="excerpt d-none d-xl-block">{ excerpt }</p>
-                                <span class="small-detail published-date">
-                                    { a few moments ago }
-                                </span>
+                                <div class="small-detail">
+                                    <span class="published-date"> a few moments ago </span>
+                                    <span class="author"></span>
+                                </div>
                             </div>
                         </a>
 
@@ -110,29 +118,12 @@
                     <!-- Error loading feed template -->
                     <div id="error-feed" class="text-center">
                         <span class="feed-status-icon">⚡️🤖⚡️</span>
-                        <h5 class="">Error loading feed at { feed.url }</h5>
-                        <input class="btn btn-outline-primary" type="submit" value="Back">
-                        <input class="btn btn-outline-primary" type="submit" value="Reload">
+                        <h5 class="">Error loading feed</h5>
+                        <input class="back-to-create-feed btn btn-outline-primary" type="submit" value="Back">
                     </div>
 
                 </div>
 
-
-
-                <!-- RSS items container begin -->
-                <!-- <div id="rss-items-container2" class="rss-items-container col-12 col-md-6 col-xl-4 my-3 p-3 bg-white rounded shadow-sm">
-                    
-                    <div id="rss-item-126" class="rss-item text-muted py-2 border-top" style="position: relative; display: block">
-                        <div class="number" style="">1</div>
-                        <div class="details pb-3 mb-0 small lh-125 border-gray" style="" >
-                            <a class="readmore" target="_blank" href="{ link }"><h4 class="item-title" class="d-block text-gray-dark">{ title }</h4></a>
-                            <p class="excerpt">{ excerpt }</p>
-                            <a class="readmore" target="_blank" href="{ link }">Read more...</a>
-                        </div>
-                        <br class="clearfix clear" />
-                    </div>
-
-                </div> -->
 
             </div>
         </main>
