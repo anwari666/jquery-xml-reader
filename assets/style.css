@@ -1,22 +1,30 @@
+/* File: style.css 
+ * Author: Anwari Ilman
+ * Normalized using Bootstrap css
+ */
 @import url('./my-animation.css');
 
+
+
+/* SECTION: General */
 body {  
   font-family: "Source Sans Pro", Helvetica, Arial, Verdana, sans-serif;
-
+  
   /* Used colorzilla to generate gradient. 
-    http://colorzilla.com/gradient-editor/#0e77f7+0,18f7d9+21,ffffff+21,ffffff+100 */
+   * http://colorzilla.com/gradient-editor/#0e77f7+0,18f7d9+21,ffffff+21,ffffff+100 
+   */
   background: #0e77f7; /* Old browsers */
   background: -moz-linear-gradient(-80deg, #0e77f7 0%, #18f7d9 21%, #ffffff 21%, #ffffff 100%); /* FF3.6-15 */
   background: -webkit-linear-gradient(-80deg, #0e77f7 0%,#18f7d9 21%,#ffffff 21%,#ffffff 100%); /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(170deg, #0e77f7 0%,#18f7d9 21%,#ffffff 21%,#ffffff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0e77f7', endColorstr='#ffffff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  min-height: 800px;
+
 }
-
-h1, h2, h3, h4, h5, h6 {
-  /* font-family: 'Merriweather', serif; */
-}
+/* END SECTION: General */
 
 
+/* SECTION: Header */
 h1#page-title {
   font-size: 3em;
   font-weight: bold;
@@ -30,18 +38,22 @@ button#add-new-feed {
   border: 2px solid white;
 }
 
-  /* bigger header for bigger screen */
-  @media only screen and (min-width: 780px) {
-    h1#page-title {
-      font-size: 3.8em
-    }
-
-    button#add-new-feed {
-      font-size: 1.2em;
-      margin-top: 0.5em;
-    }
+/* bigger header for bigger screen */
+@media only screen and (min-width: 780px) {
+  h1#page-title {
+    font-size: 3.8em
   }
 
+  button#add-new-feed {
+    font-size: 1.2em;
+    margin-top: 0.5em;
+  }
+}
+/* END SECTION: Header */
+
+
+
+/* SECTION: Main area */
 .new-feedreader h4 {
   color: #4f6bef;
   border-bottom: 2px solid #4f6bef;
@@ -50,9 +62,8 @@ button#add-new-feed {
 .rss-item .number { 
     position: absolute;
     text-align: center; 
-    border: 1px solid #4f6bef; 
-    color: #4f6bef; 
-    background-color: white; 
+    color:  white; 
+    background-color: #4f6bef; 
     width: 28px;
     height: 28px; 
     margin-left: 2px;
@@ -66,42 +77,19 @@ h3.rss-item-heading {
   border-bottom: 2px solid #4f6bef;
 }
 
-/* COLOR CONFIG FOR EACH COLUMN */
-.color_2 .rss-item .number,
-.color_2 h3.rss-item-heading,
-.color_2 .new-feedreader h4 {
-  border-color: #e90052; 
-  color: #e90052; 
+.rss-item .details {
+    margin-left: 40px;
 }
 
-.color_3 .rss-item .number,
-.color_3 h3.rss-item-heading,
-.color_3 .new-feedreader h4, {
-  border-color: #02b35e; 
-  color: #02b35e; 
+.rss-item .item-title {
+    font-size: 1.4em;
 }
 
-.color_4 .rss-item .number,
-.color_4 h3.rss-item-heading,
-.color_4 .new-feedreader h4 {
-  border-color: #f5b211; 
-  color: #f5b211; 
+.feed-status-icon {
+    font-size: 96px;
 }
 
-.color_5 .rss-item .number,
-.color_5 h3.rss-item-heading,
-.color_6 .new-feedreader h4 {
-  border-color: #f95202; 
-  color: #f95202; 
-}
-
-.color_6 .rss-item .number,
-.color_6 h3.rss-item-heading,
-.color_7 .new-feedreader h4 {
-  border-color: #4f6bef; 
-  color: #4f6bef; 
-}
-
+/* Feed links style & behavior */
 .rss-item a:hover {
   text-decoration: none;
 }
@@ -122,26 +110,43 @@ h3.rss-item-heading {
 .rss-item a:hover h4 {
   color: #1fa2ff; 
 }
+/* END SECTION: Main area */
 
-.rss-item .details {
-    margin-left: 40px;
+
+/* MISCELLANEOUS */
+
+/* COLOR CONFIG for each column */
+.color_2 .rss-item .number { background-color: #e90052}
+.color_2 h3.rss-item-heading,
+.color_2 .new-feedreader h4 {
+  border-color: #e90052; 
+  color: #e90052; 
 }
 
-.rss-item .item-title {
-    font-size: 1.4em;
-    /* height: 1.4em; */
+.color_3 .rss-item .number { background-color: #02b35e; }
+.color_3 h3.rss-item-heading,
+.color_3 .new-feedreader h4 {
+  border-color: #02b35e; 
+  color: #02b35e; 
 }
 
-.feed-status-icon {
-    font-size: 96px;
+.color_4 .rss-item .number { background-color: #f5b211; }
+.color_4 h3.rss-item-heading,
+.color_4 .new-feedreader h4 {
+  border-color: #f5b211; 
+  color: #f5b211; 
 }
 
-@keyframes loading {
-    0% { opacity: .3; }
-    50%   { opacity: 1;}
-    100%   { opacity: .3;}
+.color_5 .rss-item .number { background-color: #f95202; }
+.color_5 h3.rss-item-heading,
+.color_5 .new-feedreader h4 {
+  border-color: #f95202; 
+  color: #f95202; 
 }
 
-.loading-icon {
-    animation: loading 1.6s infinite;
+.color_6 .rss-item .number { background-color: #4f6bef; }
+.color_6 h3.rss-item-heading,
+.color_6 .new-feedreader h4 {
+  border-color: #4f6bef; 
+  color: #4f6bef; 
 }

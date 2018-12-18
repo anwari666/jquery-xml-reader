@@ -1,4 +1,10 @@
-/* For Loading pulse */
+/* File: my-animation.css 
+ * Author: Anwari Ilman
+ * Provides animation utility.
+ * Some are coded by me, the rest is modified from Dan Eden's nimate.css
+ */
+ 
+ /* For Loading pulse */
 @-webkit-keyframes loading {
   0% { opacity: .3; }
   50%   { opacity: 1;}

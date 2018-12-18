@@ -1,3 +1,9 @@
+ /* File: script.js
+ * Author: Anwari Ilman
+ * Main javascript file, written in Object Oriented style (when applicable)
+ * Written using vanilla js & jQuery
+ */
+
 // IIFE - to encapsulate the javascript
 (function($, moment){
     
@@ -10,8 +16,8 @@
     var $errorFeedTemplate = $('#error-feed');
     var $feedsContainer = $('#feed-reader-container');
 
-    // The FeedReader constructor to initiate new object when called.
-    // Every instance inherits prototypal inheritance
+    // The FeedReader constructor to initiate new object
+    // Every instance inherits FeedReader's method via prototypal inheritance
     var FeedReader = function(url, callback){
         this.id         = Date.now();
         this.url        = url || false;
@@ -145,7 +151,6 @@
         return $entryTemplate;
     }
 
-
     // Format the header. Ideally with RSS info like the name, desc, etc.
     FeedReader.prototype.formatHeader = function(){
         this.$header = $feedHeaderTemplate.clone();
@@ -169,12 +174,6 @@
         this.$htmlContainer.find('.bg-white').html( $item )
     }
 
-    FeedReader.prototype.refresh = function(){
-        // reload new things
-        // diff it
-        // add new items into view + new notif.
-    }
-
     FeedReader.prototype.formatPublishedDate = function(utcString){
         return moment( utcString ).fromNow();
     }
@@ -193,6 +192,7 @@
         return doc.documentElement.textContent;
     }
 
+    // bind jQuery's events
     function bindEvents() {
         $('#add-new-feed').on('click', function(e){
             var reader = new FeedReader();
@@ -204,13 +204,10 @@
     function main(){
         bindEvents();
 
+        // create new FeedReader object for engadget
         var engadget = new FeedReader(feedUrl, null);
         feeds.push(engadget);
 
-        // var aljazeera = new FeedReader('https://www.aljazeera.com/xml/rss/all.xml', null).render();
-        // new FeedReader('https://www.theonion.com/rss', null).render();
-        // https://www.dailymail.co.uk/articles.rss
-        // https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml
     }
 
     main();
