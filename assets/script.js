@@ -4,7 +4,7 @@
  * Written using vanilla js & jQuery
  */
 
-// IIFE - to encapsulate the javascript
+// IIFE
 (function($, moment){
     
     var feeds = [];
